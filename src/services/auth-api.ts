@@ -6,22 +6,22 @@ export async function registerUser(payload: {
   name: string;
   email: string;
   role: Role;
-  faceImage: string;
+  faceDescriptor: number[];
 }): Promise<AuthUser> {
   const res = await fetch(API_BASE + '/register', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
   });
-  if (!res.ok) throw new Error((await res.text()) || 'Registration failed');
+  if (!res.ok) throw new Error((await res.json()).error || 'Registration failed');
   return (await res.json()).user;
 }
 
-export async function loginWithFace(faceImage: string): Promise<AuthUser> {
+export async function loginWithFace(faceDescriptor: number[]): Promise<AuthUser> {
   const res = await fetch(API_BASE + '/login-face', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ faceImage }),
+    body: JSON.stringify({ faceDescriptor }),
   });
   if (!res.ok) throw new Error('Face not recognized');
   return (await res.json()).user;
