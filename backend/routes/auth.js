@@ -5,16 +5,17 @@ const User = require('../models/User');
 // REGISTER
 router.post('/register', async (req, res) => {
   try {
-    console.log('Register request body:', req.body); // debug
-    const { name, email, role, faceImage } = req.body;
-    
+    console.log('Register request body:', { ...req.body, faceDescriptor: 'array' });
+    const { name, email, role, faceDescriptor } = req.body;
+
     if (!email) return res.status(400).json({ error: 'Email is required' });
     if (!name) return res.status(400).json({ error: 'Name is required' });
+    if (!faceDescriptor) return res.status(400).json({ error: 'Face data is required' });
 
     const existing = await User.findOne({ email });
     if (existing) return res.status(400).json({ error: 'A user with this email is already registered' });
-    
-    const user = new User({ name, email, role: role || 'user', faceImage });
+
+    const user = new User({ name, email, role: role || 'user', faceDescriptor });
     await user.save();
     res.json({ user: { id: user._id, name, email, role: user.role, createdAt: user.createdAt } });
   } catch (err) {
@@ -25,10 +26,33 @@ router.post('/register', async (req, res) => {
 // LOGIN WITH FACE
 router.post('/login-face', async (req, res) => {
   try {
+    const { faceDescriptor } = req.body;
+    if (!faceDescriptor) return res.status(400).json({ error: 'Face data required' });
+
     const users = await User.find();
-    if (users.length === 0) throw new Error('No registered faces');
-    const user = users[0];
-    res.json({ user: { id: user._id, name: user.name, email: user.email, role: user.role, createdAt: user.createdAt } });
+    if (users.length === 0) return res.status(401).json({ error: 'No registered faces' });
+
+    const THRESHOLD = 0.3;
+    let matchedUser = null;
+    let lowestDistance = Infinity;
+
+    for (let user of users) {
+      if (!user.faceDescriptor || user.faceDescriptor.length === 0) continue;
+      const distance = euclideanDistance(user.faceDescriptor, faceDescriptor);
+      console.log(`Distance for ${user.name}: ${distance}`);
+      if (distance < THRESHOLD && distance < lowestDistance) {
+        lowestDistance = distance;
+        matchedUser = user;
+      }
+    }
+
+    if (matchedUser) {
+      console.log(`✅ Matched: ${matchedUser.name} with distance ${lowestDistance}`);
+      res.json({ user: { id: matchedUser._id, name: matchedUser.name, email: matchedUser.email, role: matchedUser.role, createdAt: matchedUser.createdAt } });
+    } else {
+      console.log(`❌ No match found. Lowest distance: ${lowestDistance}`);
+      res.status(401).json({ error: 'Face not recognized' });
+    }
   } catch (err) {
     res.status(401).json({ error: err.message });
   }
@@ -53,5 +77,11 @@ router.delete('/user/:id', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+function euclideanDistance(arr1, arr2) {
+  return Math.sqrt(
+    arr1.reduce((sum, val, i) => sum + Math.pow(val - arr2[i], 2), 0)
+  );
+}
 
 module.exports = router;
