@@ -1,4 +1,5 @@
 /**
+ * asim saeed"i am working on database
  * User Model - FaceGate Authentication System
  * Author: Asim Saeed - Database Engineer
  * Date: April 2026
