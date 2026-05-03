@@ -1,3 +1,17 @@
+/**
+ * Authentication Routes - FaceGate
+ * Author: [Your Name] - Database Engineer
+ * Date: April 2026
+ *
+ * Routes:
+ *   POST /register    - Register new user with face descriptor
+ *   POST /login-face  - Authenticate user by comparing face descriptors
+ *   GET  /users       - List all users (admin only)
+ *   DELETE /user/:id  - Remove a user by ID (admin only)
+ *
+ * Database: MongoDB via Mongoose
+ * Security: Euclidean distance threshold 0.3 for face matching
+ */
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
