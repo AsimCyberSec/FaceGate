@@ -19,9 +19,8 @@ app.use((req, res, next) => {
 const authRoutes = require('./routes/auth');
 app.use('/', authRoutes);
 
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('✅ MongoDB Connected'))
-  .catch(err => console.log('❌ Error:', err));
+const connectDB = require('./config/db');
+connectDB();
 
 app.get('/', (req, res) => res.send('Backend running!'));
 
