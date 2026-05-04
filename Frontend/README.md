@@ -16,8 +16,8 @@
 
 ### 1. Clone the repository
 \\\ash
-git clone https://github.com/AsimCyberSec/iris-auth-main.git
-cd iris-auth-main
+git clone https://github.com/AsimCyberSec/FaceGate.git
+cd FaceGate
 \\\
 
 ### 2. Run setup (only once)
@@ -37,15 +37,15 @@ http://localhost:8080
 
 ## Project Structure
 \\\
-iris-auth-main/
+FaceGate/
 +-- backend/              <- Express + MongoDB
-¦   +-- models/User.js
-¦   +-- routes/auth.js
-¦   +-- server.js
+   +-- models/User.js
+   +-- routes/auth.js
+   +-- server.js
 +-- src/                  <- React frontend
-¦   +-- components/
-¦   +-- routes/
-¦   +-- services/
+   +-- components/
+   +-- routes/
+   +-- services/
 +-- public/models/        <- face-api.js weights
 +-- setup.bat             <- install dependencies
 +-- start.bat             <- start the project

@@ -5,7 +5,7 @@ A passwordless biometric authentication system using facial recognition powered 
 ## 📁 Project Structure
 
 ```
-iris-auth-mainn/
+FaceGate/
 ├── Backend/          → Express.js API server (routes, authentication logic)
 ├── Database/         → MongoDB models and configuration (schemas, seeds, connection)
 ├── Frontend/         → React + Vite + TanStack Router UI (components, pages, services)
