@@ -22,6 +22,11 @@ FaceGate/
 2. **Start** - Run `start.bat` to launch both servers
 3. **Open** - Visit `http://localhost:5173` in your browser
 
+### Alternative: Terminal Commands
+If you prefer running from the terminal instead of using batch scripts:
+- **Backend**: `npm run start:backend` (from the main folder)
+- **Frontend**: `npm run start:frontend` (from the main folder)
+
 ## 📂 Folder Details
 
 ### Backend/
