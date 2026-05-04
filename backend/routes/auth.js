@@ -1,3 +1,5 @@
+// Auth routes - Security handled by Shaheer Ahmad
+// Updated: input validation improved
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
