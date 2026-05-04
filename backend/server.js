@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 const authRoutes = require('./routes/auth');
 app.use('/', authRoutes);
 
-const connectDB = require('./config/db');
+const connectDB = require('../Database/config/db');
 connectDB();
 
 app.get('/', (req, res) => res.send('Backend running!'));

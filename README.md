@@ -1,64 +1,57 @@
-# FaceGate - Face Recognition Login
+# FaceGate - Iris Authentication System
 
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=nodedotjs&logoColor=white)
-![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black)
-![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat&logo=mongodb&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
+A passwordless biometric authentication system using facial recognition powered by face-api.js.
 
-> A secure, passwordless authentication system using real-time face recognition.
+## 📁 Project Structure
 
-## Requirements
-- [Node.js](https://nodejs.org)
-- [MongoDB](https://www.mongodb.com/try/download/community)
-- [Git](https://git-scm.com)
+```
+iris-auth-mainn/
+├── Backend/          → Express.js API server (routes, authentication logic)
+├── Database/         → MongoDB models and configuration (schemas, seeds, connection)
+├── Frontend/         → React + Vite + TanStack Router UI (components, pages, services)
+├── Security/         → SAST/DAST security scan reports
+├── Miscellaneous/    → Old, duplicate, and unused files (archived for reference)
+├── start.bat         → Launch both backend and frontend servers
+├── setup.bat         → Install all dependencies and configure environment
+└── README.md         → This file
+```
 
-## Quick Start
+## 🚀 Quick Start
 
-### 1. Clone the repository
-\\\ash
-git clone https://github.com/AsimCyberSec/iris-auth-main.git
-cd iris-auth-main
-\\\
+1. **Setup** - Run `setup.bat` to install all dependencies
+2. **Start** - Run `start.bat` to launch both servers
+3. **Open** - Visit `http://localhost:5173` in your browser
 
-### 2. Run setup (only once)
-\\\
-double click setup.bat
-\\\
+## 📂 Folder Details
 
-### 3. Start the project (every time)
-\\\
-double click start.bat
-\\\
+### Backend/
+- `server.js` - Express server entry point
+- `routes/auth.js` - Authentication API routes (register, login, users, delete)
+- `.env` - MongoDB connection string and port config
 
-### 4. Open in browser
-\\\
-http://localhost:8080
-\\\
+### Database/
+- `models/User.js` - Mongoose schema for user data with face descriptors
+- `config/db.js` - MongoDB connection handler with reconnection logic
+- `config/seed.js` - Database seeder for initial setup
 
-## Project Structure
-\\\
-iris-auth-main/
-+-- backend/              <- Express + MongoDB
-�   +-- models/User.js
-�   +-- routes/auth.js
-�   +-- server.js
-+-- src/                  <- React frontend
-�   +-- components/
-�   +-- routes/
-�   +-- services/
-+-- public/models/        <- face-api.js weights
-+-- setup.bat             <- install dependencies
-+-- start.bat             <- start the project
-\\\
+### Frontend/
+- `src/routes/` - Page components (login, register, dashboard, admin)
+- `src/components/` - Reusable UI components (FaceCapture, Navbar, Sidebar, etc.)
+- `src/services/auth-api.ts` - API client for backend communication
+- `src/lib/auth-context.tsx` - Authentication state management
+- `public/models/` - face-api.js ML model weights
 
-## Team
-| Role | Responsibility |
-|------|---------------|
-| Database | MongoDB models |
-| Backend | Express API routes |
-| Frontend | React + face-api.js |
-| Security | CORS + rate limiting |
+### Security/
+- Bandit SAST reports (HTML, XML)
+- DAST scan reports (JSON)
+- Static analysis results
 
-## Ports
-- Backend: http://localhost:5000
-- Frontend: http://localhost:8080
+### Miscellaneous/
+- `Old-Files/` - Outdated versions of files from earlier development
+- `Duplicate-Files/` - Redundant copies that were scattered across the project
+
+## 🛠 Tech Stack
+- **Frontend**: React, Vite, TanStack Router, TailwindCSS, shadcn/ui
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB, Mongoose
+- **Auth**: face-api.js (biometric face recognition)
