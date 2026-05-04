@@ -1,7 +1,7 @@
 {
-  "name": "facegate-iris-auth",
+  "name": "facegate",
   "version": "1.0.0",
-  "description": "FaceGate - Iris Authentication System",
+  "description": "FaceGate - Facial Authentication System",
   "private": true,
   "scripts": {
     "start:backend": "cd Backend && node server.js",

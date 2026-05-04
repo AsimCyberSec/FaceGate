@@ -1,4 +1,4 @@
-# FaceGate - Iris Authentication System
+# FaceGate - Facial Authentication System
 
 A passwordless biometric authentication system using facial recognition powered by face-api.js.
 
